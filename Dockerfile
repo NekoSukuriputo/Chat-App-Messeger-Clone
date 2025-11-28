@@ -17,6 +17,16 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# 1. Definisikan bahwa Docker boleh menerima argumen ini dari Jenkins
+ARG NEXT_PUBLIC_PUSHER_APP_KEY
+ARG PUSHER_APP_ID
+ARG PUSHER_SECRET
+
+# 2. Masukkan argumen tersebut ke environment variable agar bisa dibaca Next.js saat build
+ENV NEXT_PUBLIC_PUSHER_APP_KEY=$NEXT_PUBLIC_PUSHER_APP_KEY
+ENV PUSHER_APP_ID=$PUSHER_APP_ID
+ENV PUSHER_SECRET=$PUSHER_SECRET
+
 # Matikan telemetry Next.js saat build
 ENV NEXT_TELEMETRY_DISABLED 1
 
