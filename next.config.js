@@ -4,6 +4,7 @@ const nextConfig = {
     appDir: true,
     swcPlugins: [["next-superjson-plugin", {}]]
   },
+  output: 'standalone',
   images: {
     domains: [
       'res.cloudinary.com', 
