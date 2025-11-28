@@ -1,13 +1,13 @@
 # --- Stage 1: Dependencies ---
 FROM node:18-alpine AS deps
-# Install libc6-compat (diperlukan untuk beberapa library di Alpine)
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copy package.json dan package-lock.json
 COPY package.json package-lock.json ./
 
-# Install dependencies sesuai lock file (Persis permintaan Anda)
+# TAMBAHAN: Copy prisma schema SEBELUM npm ci agar 'prisma generate' berjalan sukses
+COPY prisma ./prisma 
+
 RUN npm ci
 
 # --- Stage 2: Builder ---
